@@ -15,10 +15,10 @@ const ProjectCard = ({ project, onSelectProject }) => {
         <div className="project-top">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{ 
-              background: project.badgeType === 'red' ? 'rgba(56, 189, 248, 0.1)' : 'rgba(99, 102, 241, 0.1)',
+              background: project.badgeType === 'red' ? 'rgba(255, 51, 102, 0.1)' : 'rgba(168, 85, 247, 0.1)',
               padding: '0.65rem',
               borderRadius: '10px',
-              border: `1px solid ${project.badgeType === 'red' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(99, 102, 241, 0.25)'}`
+              border: `1px solid ${project.badgeType === 'red' ? 'rgba(255, 51, 102, 0.25)' : 'rgba(168, 85, 247, 0.25)'}`
             }}>
               {project.icon}
             </div>
@@ -66,7 +66,7 @@ const ProjectCard = ({ project, onSelectProject }) => {
             className="btn-secondary" 
             style={{ flex: 1, justifyContent: 'center', fontSize: '0.85rem', padding: '0.6rem 0.8rem', gap: '0.4rem', background: 'rgba(255,255,255,0.03)', borderColor: 'var(--border-highlight)' }}
           >
-            <Code2 size={15} color="var(--accent-cyan)" /> In-Depth Architecture & Code
+            <Code2 size={15} color="var(--accent-red)" /> In-Depth Architecture & Code
           </button>
 
           {project.github && (

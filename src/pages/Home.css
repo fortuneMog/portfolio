@@ -95,15 +95,15 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: var(--accent-cyan);
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid rgba(255, 51, 102, 0.25);
+  color: var(--accent-red);
 }
 
 .skill-icon-wrapper.purple {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  color: var(--accent-secondary);
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--accent-purple);
 }
 
 .skill-card h3 {
@@ -175,7 +175,7 @@
   background: var(--accent-gradient);
   color: #FFFFFF;
   border-color: transparent;
-  box-shadow: 0 4px 18px var(--accent-primary-glow);
+  box-shadow: 0 4px 18px var(--accent-red-glow);
 }
 
 .stack-content-grid {

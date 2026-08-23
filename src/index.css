@@ -12,42 +12,40 @@
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
   
-  /* Modern Engineering Accents: Sapphire Blue, Electric Indigo, Cyan, Emerald */
-  --accent-primary: #3B82F6;
-  --accent-primary-glow: rgba(59, 130, 246, 0.22);
-  --accent-secondary: #6366F1;
-  --accent-secondary-glow: rgba(99, 102, 241, 0.22);
-  --accent-cyan: #38BDF8;
-  --accent-cyan-glow: rgba(56, 189, 248, 0.2);
+  /* Signature Bright Crimson Red & Electric Purple Accents */
+  --accent-red: #FF3366;
+  --accent-red-glow: rgba(255, 51, 102, 0.35);
+  --accent-purple: #A855F7;
+  --accent-purple-glow: rgba(168, 85, 247, 0.35);
+  --accent-primary: #FF3366;
+  --accent-primary-glow: rgba(255, 51, 102, 0.35);
+  --accent-secondary: #A855F7;
+  --accent-secondary-glow: rgba(168, 85, 247, 0.35);
+  --accent-cyan: #FF3366;
+  --accent-cyan-glow: rgba(255, 51, 102, 0.35);
   --accent-emerald: #10B981;
   --accent-emerald-glow: rgba(16, 185, 129, 0.25);
 
-  --accent-gradient: linear-gradient(135deg, #38BDF8 0%, #3B82F6 45%, #6366F1 100%);
-  --accent-gradient-hover: linear-gradient(135deg, #60A5FA 0%, #6366F1 50%, #818CF8 100%);
-  
-  /* Compatibility aliases */
-  --accent-red: #38BDF8;
-  --accent-red-glow: rgba(56, 189, 248, 0.22);
-  --accent-purple: #6366F1;
-  --accent-purple-glow: rgba(99, 102, 241, 0.22);
+  --accent-gradient: linear-gradient(135deg, #FF3366 0%, #C026D3 50%, #8B5CF6 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #FF4D7D 0%, #D946EF 50%, #A855F7 100%);
   
   /* Refined Subtle Borders & Highlights */
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-card: rgba(148, 163, 184, 0.12);
-  --border-highlight: rgba(99, 102, 241, 0.35);
-  --border-red: rgba(56, 189, 248, 0.35);
+  --border-highlight: rgba(168, 85, 247, 0.35);
+  --border-red: rgba(255, 51, 102, 0.35);
   
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  /* Subtle Atmospheric Ambient Shadows */
+  /* Atmospheric Ambient Shadows */
   --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px -5px rgba(56, 189, 248, 0.15), 0 0 35px -10px rgba(99, 102, 241, 0.15);
+  --shadow-glow: 0 0 25px -5px rgba(255, 51, 102, 0.25), 0 0 35px -10px rgba(168, 85, 247, 0.25);
   --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
   
-  --bg-gradient-1: rgba(56, 189, 248, 0.06);
-  --bg-gradient-2: rgba(99, 102, 241, 0.07);
-  --bg-gradient-3: rgba(59, 130, 246, 0.05);
+  --bg-gradient-1: rgba(255, 51, 102, 0.07);
+  --bg-gradient-2: rgba(168, 85, 247, 0.08);
+  --bg-gradient-3: rgba(192, 38, 211, 0.05);
 }
 
 * {
@@ -104,16 +102,16 @@ a {
 }
 
 .glow-red {
-  color: var(--accent-cyan);
-  text-shadow: 0 0 16px var(--accent-cyan-glow);
+  color: var(--accent-red);
+  text-shadow: 0 0 16px var(--accent-red-glow);
 }
 
 .glow-purple {
-  color: var(--accent-secondary);
-  text-shadow: 0 0 16px var(--accent-secondary-glow);
+  color: var(--accent-purple);
+  text-shadow: 0 0 16px var(--accent-purple-glow);
 }
 
-/* Cards with Sleek Linear/Vercel Undertones */
+/* Cards with Sleek Undertones */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -134,7 +132,7 @@ a {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.6), rgba(99, 102, 241, 0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.7), rgba(168, 85, 247, 0.7), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -164,14 +162,14 @@ a {
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 18px var(--accent-primary-glow);
+  box-shadow: 0 4px 18px var(--accent-red-glow);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover {
   background: var(--accent-gradient-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px var(--accent-primary-glow), 0 0 15px var(--accent-secondary-glow);
+  box-shadow: 0 6px 22px var(--accent-red-glow), 0 0 15px var(--accent-purple-glow);
   color: #FFFFFF;
 }
 
@@ -206,22 +204,22 @@ a {
   align-items: center;
   gap: 0.55rem;
   padding: 0.45rem 1.15rem;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(255, 51, 102, 0.08);
+  border: 1px solid rgba(255, 51, 102, 0.25);
   border-radius: 9999px;
   font-size: 0.84rem;
   font-weight: 600;
-  color: #6EE7B7;
+  color: #FFA3BA;
   margin-bottom: 1.5rem;
-  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 20px -5px rgba(255, 51, 102, 0.2);
 }
 
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--accent-emerald);
-  box-shadow: 0 0 10px var(--accent-emerald);
+  background-color: var(--accent-red);
+  box-shadow: 0 0 10px var(--accent-red);
   animation: pulse-dot 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -231,22 +229,22 @@ a {
 }
 
 .tag {
-  background-color: rgba(99, 102, 241, 0.08);
-  color: #C7D2FE;
+  background-color: rgba(168, 85, 247, 0.08);
+  color: #D8B4FE;
   padding: 0.35rem 0.85rem;
   border-radius: 8px;
   font-size: 0.82rem;
   font-weight: 500;
   font-family: var(--font-mono);
-  border: 1px solid rgba(99, 102, 241, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.18);
   display: inline-block;
   transition: all 0.2s ease;
 }
 
 .tag:hover {
-  background-color: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.35);
-  color: #EEF2FF;
+  background-color: rgba(255, 51, 102, 0.15);
+  border-color: rgba(255, 51, 102, 0.35);
+  color: #FFA3BA;
 }
 
 .badge {
@@ -262,15 +260,15 @@ a {
 }
 
 .badge-red {
-  background: rgba(56, 189, 248, 0.1);
-  color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: rgba(255, 51, 102, 0.1);
+  color: #FFA3BA;
+  border: 1px solid rgba(255, 51, 102, 0.25);
 }
 
 .badge-purple {
-  background: rgba(99, 102, 241, 0.1);
-  color: #A5B4FC;
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(168, 85, 247, 0.1);
+  color: #D8B4FE;
+  border: 1px solid rgba(168, 85, 247, 0.25);
 }
 
 .page-section {

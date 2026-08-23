@@ -397,10 +397,10 @@ RETURN
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <div style={{ 
-                  background: selectedProject.badgeType === 'red' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(99, 102, 241, 0.15)',
+                  background: selectedProject.badgeType === 'red' ? 'rgba(255, 51, 102, 0.12)' : 'rgba(168, 85, 247, 0.15)',
                   padding: '0.6rem',
                   borderRadius: '10px',
-                  border: `1px solid ${selectedProject.badgeType === 'red' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(99, 102, 241, 0.25)'}`
+                  border: `1px solid ${selectedProject.badgeType === 'red' ? 'rgba(255, 51, 102, 0.25)' : 'rgba(168, 85, 247, 0.25)'}`
                 }}>
                   {selectedProject.icon}
                 </div>
@@ -420,13 +420,13 @@ RETURN
               {/* Problem & Solution */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.75rem' }}>
                 <div className="modal-callout">
-                  <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Engineering Challenge</h4>
+                  <h4 style={{ color: 'var(--accent-red)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Engineering Challenge</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
                     {selectedProject.architecture.problem}
                   </p>
                 </div>
-                <div className="modal-callout" style={{ borderLeftColor: 'var(--accent-secondary)' }}>
-                  <h4 style={{ color: 'var(--accent-secondary)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Architecture Solution</h4>
+                <div className="modal-callout" style={{ borderLeftColor: 'var(--accent-purple)' }}>
+                  <h4 style={{ color: 'var(--accent-purple)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Architecture Solution</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
                     {selectedProject.architecture.solution}
                   </p>
@@ -435,7 +435,7 @@ RETURN
 
               {/* Data Flow / Pipeline Stages */}
               <h4 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Layers size={18} color="var(--accent-cyan)" /> End-to-End Pipeline & Data Flow
+                <Layers size={18} color="var(--accent-red)" /> End-to-End Pipeline & Data Flow
               </h4>
               <div className="pipeline-flow-grid">
                 {selectedProject.architecture.flow.map((stage, idx) => (
@@ -451,7 +451,7 @@ RETURN
               <div style={{ marginTop: '1.75rem', marginBottom: '1.75rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <h4 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Terminal size={18} color="var(--accent-secondary)" /> Core Implementation Code & Schemas
+                    <Terminal size={18} color="var(--accent-purple)" /> Core Implementation Code & Schemas
                   </h4>
                   <button 
                     onClick={() => handleCopy(selectedProject.architecture.codeSnippet)}

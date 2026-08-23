@@ -36,9 +36,9 @@
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(99, 102, 241, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(255, 51, 102, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
   border: 1px solid var(--border-highlight);
-  color: var(--accent-cyan);
+  color: var(--accent-red);
 }
 
 .logo-text {
@@ -47,7 +47,7 @@
 }
 
 .logo-accent {
-  color: var(--accent-secondary);
+  color: var(--accent-purple);
 }
 
 .nav-links {
@@ -115,10 +115,10 @@
 
 .social-icon:hover {
   color: var(--text-primary);
-  background: rgba(56, 189, 248, 0.12);
-  border-color: var(--accent-cyan);
+  background: rgba(255, 51, 102, 0.15);
+  border-color: var(--accent-red);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px var(--accent-cyan-glow);
+  box-shadow: 0 4px 15px var(--accent-red-glow);
 }
 
 .mobile-menu-btn {
