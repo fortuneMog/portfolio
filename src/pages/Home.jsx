@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { ArrowRight, Database, Cloud, ShieldCheck, FileText, TrendingUp, CheckCircle2, Download } from 'lucide-react';
+import { ArrowRight, Database, Cloud, ShieldCheck, FileText, TrendingUp, CheckCircle2, Download, Mail, Copy, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SkillCard from '../components/SkillCard';
 import './Home.css';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('cloud');
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('fortunemogoeng@gmail.com');
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
 
   const stackDetails = {
     cloud: [
@@ -200,11 +207,19 @@ const Home = () => {
               I'm currently open to Senior Cloud Data Engineering roles. Let's schedule a call to discuss how I can optimize your cloud infrastructure and BI workflows.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noreferrer" className="btn-primary">
-                Schedule a Call <ArrowRight size={18} />
+              <a href="mailto:fortunemogoeng@gmail.com" className="btn-primary" style={{ gap: '0.6rem' }}>
+                <Mail size={18} /> Email Me: fortunemogoeng@gmail.com
               </a>
-              <a href="mailto:fortunemogoeng@gmail.com" className="btn-secondary">
-                Email Me Directly
+              <button 
+                onClick={handleCopyEmail}
+                className="btn-secondary"
+                style={{ gap: '0.5rem' }}
+                title="Copy email to clipboard"
+              >
+                {copiedEmail ? <><Check size={16} color="var(--accent-emerald)" /> Email Copied!</> : <><Copy size={16} /> Copy Email Address</>}
+              </button>
+              <a href="https://www.linkedin.com/in/fortunemogoeng/" target="_blank" rel="noreferrer" className="btn-secondary">
+                LinkedIn Profile <ArrowRight size={16} />
               </a>
             </div>
           </div>
