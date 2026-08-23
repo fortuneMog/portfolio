@@ -1,23 +1,54 @@
-import React, { useState } from 'react';
-import { Database, ExternalLink, ShieldCheck, Cpu, Code2, Sparkles, Filter, Layers, Server, Car, Bot, Cloud, BarChart3, X, CheckCircle2, ChevronRight, Terminal, Copy, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Database, Layers, Car, Bot, Cloud, BarChart3, X, CheckCircle2, Terminal, Copy, Check } from 'lucide-react';
+import ProjectCard from '../components/ProjectCard';
 import './Projects.css';
-
-const GithubIcon = ({ size = 16 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [copiedCode, setCopiedCode] = useState(false);
 
-  const handleCopy = (code) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(true);
-    setTimeout(() => setCopiedCode(false), 2000);
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProject]);
+
+  const handleCopy = async (code) => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(code);
+      } else {
+        // Fallback for environments where clipboard API is unavailable
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+      }
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code to clipboard: ', err);
+    }
   };
 
   const projects = [
@@ -93,7 +124,7 @@ LIMIT 25;`,
         "Enforced audit-ready data normalization, validation checks, and reporting views for asset finance auditing"
       ],
       tags: ["Python", "SQL / T-SQL", "Pandas", "Dimensional Modeling", "Data Reconciliation", "FinTech"],
-      github: null,
+      github: "https://github.com/fortuneMog/Vehicle_Finance_Reconciliation",
       architecture: {
         problem: "Automotive dealerships and asset finance lenders suffer from inventory catalog discrepancies when dealer stock entries diverge from MM (Mead & McGrouther) master vehicle codes, leading to valuation errors and delayed loan approvals.",
         solution: "Built a Python & SQL reconciliation pipeline executing multi-table relational joins, fuzzy string matching, and discrepancy flaggers to synchronize live inventory against official automotive catalogs.",
@@ -149,7 +180,7 @@ def reconcile_vehicle_stock(stock_df, mm_catalog_df, service_df):
         "Designed agentic error recovery loops for autonomous data cleaning and discrepancy detection"
       ],
       tags: ["Anthropic Claude API", "Model Context Protocol (MCP)", "Claude Code", "Python", "Tool Calling"],
-      github: null,
+      github: "https://github.com/fortuneMog/MCP_Autonomous_Agent",
       architecture: {
         problem: "Business analysts and non-technical stakeholders struggle to construct complex SQL queries against enterprise schemas, while engineering teams spend repetitive hours writing ad-hoc validation scripts.",
         solution: "Constructed an MCP (Model Context Protocol) agent server integrating Anthropic Claude API with function calling, allowing the LLM to inspect schemas, generate validated SQL, and return formatted analytical insights securely.",
@@ -195,7 +226,7 @@ def reconcile_vehicle_stock(stock_df, mm_catalog_df, service_df):
         "Automated infrastructure provisioning using Terraform (IaC) and Azure DevOps CI/CD release pipelines"
       ],
       tags: ["Azure Data Factory", "Azure Data Lake (ADLS Gen2)", "Synapse Analytics", "Terraform", "CI/CD"],
-      github: null,
+      github: "https://github.com/fortuneMog/Azure_Data_Lakehouse",
       architecture: {
         problem: "Enterprise on-premise transactional systems generated siloed financial records, making real-time cross-platform reporting slow, fragile, and prone to infrastructure bottlenecks.",
         solution: "Architected an end-to-end Medallion Lakehouse on Microsoft Azure (Bronze / Raw -> Silver / Enriched -> Gold / Curated) orchestrated by Azure Data Factory and Synapse Analytics.",
@@ -237,7 +268,7 @@ resource "azurerm_storage_account" "lakehouse_sa" {
         "Automated data refresh schedules and SSRS financial packages, eliminating manual spreadsheet overhead"
       ],
       tags: ["Microsoft Power BI", "Advanced DAX", "Power Query (M)", "Credit Risk Analytics", "SSRS"],
-      github: null,
+      github: "https://github.com/fortuneMog/PowerBI_Credit_Risk_Analytics",
       architecture: {
         problem: "Executive risk teams lacked real-time visibility into credit portfolio health, default probabilities, and loan settlement velocity across multi-branch lending operations.",
         solution: "Constructed a high-performance tabular data model in Power BI with optimized DAX measures, dynamic time intelligence, and granular department-level Row-Level Security (RLS).",
@@ -355,73 +386,7 @@ RETURN
       {/* Projects Grid */}
       <div className="projects-grid">
         {filteredProjects.map((project) => (
-          <div key={project.id} className="card project-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div>
-              <div className="project-top">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ 
-                    background: project.badgeType === 'red' ? 'rgba(255, 51, 102, 0.1)' : 'rgba(168, 85, 247, 0.1)',
-                    padding: '0.65rem',
-                    borderRadius: '10px',
-                    border: `1px solid ${project.badgeType === 'red' ? 'rgba(255, 51, 102, 0.2)' : 'rgba(168, 85, 247, 0.2)'}`
-                  }}>
-                    {project.icon}
-                  </div>
-                  <span className={`badge ${project.badgeType === 'red' ? 'badge-red' : 'badge-purple'}`}>
-                    {project.badge}
-                  </span>
-                </div>
-
-                {project.github && (
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="project-link-btn"
-                    title="View GitHub Repository"
-                  >
-                    <GithubIcon size={16} /> <span>Code</span>
-                  </a>
-                )}
-              </div>
-
-              <h3 className="project-title" style={{ fontSize: '1.25rem', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{project.title}</h3>
-              
-              <p className="project-desc" style={{ fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{project.description}</p>
-
-              <div className="project-highlights">
-                <ul>
-                  {project.highlights.map((item, idx) => (
-                    <li key={idx} style={{ fontSize: '0.85rem' }}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="project-footer" style={{ marginTop: '1.5rem' }}>
-              <div className="tags-container" style={{ marginBottom: '1.25rem' }}>
-                {project.tags.map((tag, idx) => (
-                  <span key={idx} className="tag" style={{ fontSize: '0.72rem', padding: '0.2rem 0.5rem' }}>{tag}</span>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-                <button 
-                  onClick={() => setSelectedProject(project)}
-                  className="btn-secondary" 
-                  style={{ flex: 1, justifyContent: 'center', fontSize: '0.85rem', padding: '0.6rem 0.8rem', gap: '0.4rem', background: 'rgba(255,255,255,0.04)', borderColor: 'var(--border-highlight)' }}
-                >
-                  <Code2 size={15} color="var(--accent-red)" /> In-Depth Architecture & Code
-                </button>
-
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.6rem 0.9rem', fontSize: '0.85rem' }}>
-                    <GithubIcon size={15} /> GitHub
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+          <ProjectCard key={project.id} project={project} onSelectProject={setSelectedProject} />
         ))}
       </div>
 
@@ -432,20 +397,21 @@ RETURN
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <div style={{ 
-                  background: selectedProject.badgeType === 'red' ? 'rgba(255, 51, 102, 0.15)' : 'rgba(168, 85, 247, 0.15)',
+                  background: selectedProject.badgeType === 'red' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(99, 102, 241, 0.15)',
                   padding: '0.6rem',
-                  borderRadius: '10px'
+                  borderRadius: '10px',
+                  border: `1px solid ${selectedProject.badgeType === 'red' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(99, 102, 241, 0.25)'}`
                 }}>
                   {selectedProject.icon}
                 </div>
                 <div>
-                  <h2 style={{ fontSize: '1.4rem', color: '#FFFFFF' }}>{selectedProject.title}</h2>
+                  <h2 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>{selectedProject.title}</h2>
                   <span className={`badge ${selectedProject.badgeType === 'red' ? 'badge-red' : 'badge-purple'}`} style={{ marginTop: '0.2rem' }}>
                     {selectedProject.badge}
                   </span>
                 </div>
               </div>
-              <button className="modal-close-btn" onClick={() => setSelectedProject(null)}>
+              <button className="modal-close-btn" onClick={() => setSelectedProject(null)} aria-label="Close modal">
                 <X size={20} />
               </button>
             </div>
@@ -454,13 +420,13 @@ RETURN
               {/* Problem & Solution */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.75rem' }}>
                 <div className="modal-callout">
-                  <h4 style={{ color: 'var(--accent-red)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Engineering Challenge</h4>
+                  <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Engineering Challenge</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
                     {selectedProject.architecture.problem}
                   </p>
                 </div>
-                <div className="modal-callout" style={{ borderLeftColor: 'var(--accent-purple)' }}>
-                  <h4 style={{ color: 'var(--accent-purple)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Architecture Solution</h4>
+                <div className="modal-callout" style={{ borderLeftColor: 'var(--accent-secondary)' }}>
+                  <h4 style={{ color: 'var(--accent-secondary)', marginBottom: '0.4rem', fontSize: '0.95rem' }}>The Architecture Solution</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
                     {selectedProject.architecture.solution}
                   </p>
@@ -468,8 +434,8 @@ RETURN
               </div>
 
               {/* Data Flow / Pipeline Stages */}
-              <h4 style={{ fontSize: '1.05rem', color: '#FFFFFF', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Layers size={18} color="var(--accent-red)" /> End-to-End Pipeline & Data Flow
+              <h4 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Layers size={18} color="var(--accent-cyan)" /> End-to-End Pipeline & Data Flow
               </h4>
               <div className="pipeline-flow-grid">
                 {selectedProject.architecture.flow.map((stage, idx) => (
@@ -484,15 +450,15 @@ RETURN
               {/* Code Snippet */}
               <div style={{ marginTop: '1.75rem', marginBottom: '1.75rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <h4 style={{ fontSize: '1.05rem', color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Terminal size={18} color="var(--accent-purple)" /> Core Implementation Code & Schemas
+                  <h4 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Terminal size={18} color="var(--accent-secondary)" /> Core Implementation Code & Schemas
                   </h4>
                   <button 
                     onClick={() => handleCopy(selectedProject.architecture.codeSnippet)}
                     className="btn-secondary" 
                     style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem', gap: '0.4rem' }}
                   >
-                    {copiedCode ? <><Check size={14} color="#10B981" /> Copied</> : <><Copy size={14} /> Copy Code</>}
+                    {copiedCode ? <><Check size={14} color="var(--accent-emerald)" /> Copied</> : <><Copy size={14} /> Copy Code</>}
                   </button>
                 </div>
 
@@ -503,9 +469,9 @@ RETURN
 
               {/* Business Impact */}
               <div className="impact-box">
-                <CheckCircle2 size={20} color="var(--accent-red)" />
+                <CheckCircle2 size={20} color="var(--accent-emerald)" />
                 <div>
-                  <strong style={{ color: '#FFFFFF', fontSize: '0.92rem' }}>Measurable Engineering & Operational Impact:</strong>
+                  <strong style={{ color: 'var(--text-primary)', fontSize: '0.92rem' }}>Measurable Engineering & Operational Impact:</strong>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: '0.2rem' }}>
                     {selectedProject.architecture.impact}
                   </p>

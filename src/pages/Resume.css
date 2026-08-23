@@ -33,15 +33,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 51, 102, 0.1);
-  border: 1px solid rgba(255, 51, 102, 0.25);
-  color: var(--accent-red);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent-cyan);
 }
 
 .section-icon-box.purple {
-  background: rgba(168, 85, 247, 0.1);
-  border-color: rgba(168, 85, 247, 0.25);
-  color: var(--accent-purple);
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--accent-secondary);
 }
 
 .section-header h2 {
@@ -62,7 +62,7 @@
   bottom: 10px;
   left: 8px;
   width: 2px;
-  background: linear-gradient(180deg, var(--accent-red) 0%, var(--accent-purple) 60%, rgba(168, 85, 247, 0.1) 100%);
+  background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-secondary) 60%, rgba(99, 102, 241, 0.1) 100%);
 }
 
 .timeline-item {
@@ -78,14 +78,14 @@
   height: 18px;
   border-radius: 50%;
   background-color: var(--bg-deep);
-  border: 3px solid var(--accent-red);
-  box-shadow: 0 0 10px var(--accent-red-glow);
+  border: 3px solid var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan-glow);
   z-index: 2;
 }
 
 .timeline-dot.purple {
-  border-color: var(--accent-purple);
-  box-shadow: 0 0 10px var(--accent-purple-glow);
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 10px var(--accent-secondary-glow);
 }
 
 .timeline-content {
@@ -113,7 +113,7 @@
 .timeline-top h3 {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .timeline-date {
@@ -122,16 +122,16 @@
   gap: 0.4rem;
   font-size: 0.82rem;
   font-family: var(--font-mono);
-  color: #D8B4FE;
-  background: rgba(168, 85, 247, 0.1);
+  color: #C7D2FE;
+  background: rgba(99, 102, 241, 0.1);
   padding: 0.3rem 0.75rem;
   border-radius: 6px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.25);
 }
 
 .timeline-company {
   font-size: 1.05rem;
-  color: var(--accent-red);
+  color: var(--accent-cyan);
   font-weight: 600;
   margin-bottom: 1rem;
   display: flex;
@@ -158,7 +158,7 @@
   content: '▸';
   position: absolute;
   left: 0;
-  color: var(--accent-purple);
+  color: var(--accent-secondary);
   font-weight: bold;
 }
 

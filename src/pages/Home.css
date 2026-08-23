@@ -63,7 +63,7 @@
 .positioning-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
@@ -95,15 +95,15 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  background: rgba(255, 51, 102, 0.08);
-  border: 1px solid rgba(255, 51, 102, 0.2);
-  color: var(--accent-red);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent-cyan);
 }
 
 .skill-icon-wrapper.purple {
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  color: var(--accent-purple);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: var(--accent-secondary);
 }
 
 .skill-card h3 {
@@ -139,11 +139,11 @@
 /* Interactive Stack Explorer */
 .stack-explorer {
   margin-top: 5rem;
-  background: rgba(11, 12, 18, 0.6);
+  background: rgba(13, 18, 31, 0.7);
   border: 1px solid var(--border-subtle);
   border-radius: 18px;
   padding: 3rem 2.5rem;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
 }
 
 .stack-tabs {
@@ -167,7 +167,7 @@
 }
 
 .stack-tab:hover {
-  color: #FFFFFF;
+  color: var(--text-primary);
   border-color: var(--border-highlight);
 }
 
@@ -175,7 +175,7 @@
   background: var(--accent-gradient);
   color: #FFFFFF;
   border-color: transparent;
-  box-shadow: 0 4px 15px var(--accent-red-glow);
+  box-shadow: 0 4px 18px var(--accent-primary-glow);
 }
 
 .stack-content-grid {
@@ -193,13 +193,13 @@
 }
 
 .stack-item-card:hover {
-  border-color: var(--accent-red);
+  border-color: var(--border-highlight);
   transform: translateY(-2px);
 }
 
 .stack-item-card h4 {
   font-size: 1.1rem;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;

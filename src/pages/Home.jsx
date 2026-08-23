@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowRight, Database, Cloud, ShieldCheck, Layers, Cpu, FileText, TrendingUp, Sparkles, Server, Terminal, CheckCircle2, MapPin } from 'lucide-react';
+import { ArrowRight, Database, Cloud, ShieldCheck, FileText, TrendingUp, CheckCircle2, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SkillCard from '../components/SkillCard';
 import './Home.css';
 
 const Home = () => {
@@ -49,7 +50,7 @@ const Home = () => {
           </h1>
           
           <p className="hero-subtitle">
-            I'm <strong style={{ color: '#FFFFFF' }}>Fortune Mogoeng</strong>, a Senior Cloud Data Engineer and FinTech Business Intelligence Architect based in <strong>Cape Town, South Africa</strong>. I specialize in bridging the gap between complex cloud data infrastructure and strategic, insight-driven executive decision-making.
+            I'm <strong style={{ color: 'var(--text-primary)' }}>Fortune Mogoeng</strong>, a Senior Cloud Data Engineer and FinTech Business Intelligence Architect based in <strong>Cape Town, South Africa</strong>. I specialize in bridging the gap between complex cloud data infrastructure and strategic, insight-driven executive decision-making.
           </p>
           
           <div className="hero-actions">
@@ -59,8 +60,8 @@ const Home = () => {
             <Link to="/resume" className="btn-secondary">
               <FileText size={18} /> View Career History
             </Link>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-secondary" style={{ borderColor: 'rgba(255, 51, 102, 0.3)', color: '#FFA3BA' }}>
-              Download Master CV (PDF)
+            <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-secondary">
+              <Download size={18} /> Master CV (PDF)
             </a>
           </div>
 
@@ -96,74 +97,32 @@ const Home = () => {
         </div>
 
         <div className="skills-grid">
-          {/* Card 1 */}
-          <div className="card skill-card">
-            <div className="skill-icon-wrapper">
-              <Database size={26} />
-            </div>
-            <h3>ETL/ELT Data Engineering</h3>
-            <p>
-              Designing and automating batch and streaming data pipelines using Python, PySpark, SQL, and Apache Airflow to ingest and transform multi-source datasets.
-            </p>
-            <div className="skill-badges">
-              <span className="skill-badge">Python</span>
-              <span className="skill-badge">PySpark</span>
-              <span className="skill-badge">SQL / T-SQL</span>
-              <span className="skill-badge">Apache Airflow</span>
-              <span className="skill-badge">ETL/ELT</span>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="card skill-card">
-            <div className="skill-icon-wrapper purple">
-              <Cloud size={26} />
-            </div>
-            <h3>Cloud & Data Warehousing</h3>
-            <p>
-              Architecting scalable cloud data lakes, warehouses, and storage tiers across Azure (Data Factory, Synapse) and AWS (S3, Redshift) with Terraform and CI/CD.
-            </p>
-            <div className="skill-badges">
-              <span className="skill-badge">Azure Data Factory</span>
-              <span className="skill-badge">AWS S3 / Redshift</span>
-              <span className="skill-badge">CI/CD & DevOps</span>
-              <span className="skill-badge">Terraform / IaC</span>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="card skill-card">
-            <div className="skill-icon-wrapper">
-              <TrendingUp size={26} />
-            </div>
-            <h3>FinTech BI & Data Modeling</h3>
-            <p>
-              Kimball dimensional modeling, high-performance transactional views, and executive business intelligence dashboards in Power BI, Tableau, and SSRS.
-            </p>
-            <div className="skill-badges">
-              <span className="skill-badge">Power BI (DAX)</span>
-              <span className="skill-badge">Tableau</span>
-              <span className="skill-badge">Dimensional Modeling</span>
-              <span className="skill-badge">SSRS / SSIS</span>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="card skill-card">
-            <div className="skill-icon-wrapper purple">
-              <ShieldCheck size={26} />
-            </div>
-            <h3>Governance, Security & QA</h3>
-            <p>
-              Implementing automated data validation frameworks, masking, and encryption protocols for strict POPIA, GDPR, and regulatory audit compliance.
-            </p>
-            <div className="skill-badges">
-              <span className="skill-badge">POPIA Compliance</span>
-              <span className="skill-badge">Data Anonymization</span>
-              <span className="skill-badge">Audit Frameworks</span>
-              <span className="skill-badge">RBAC & IAM</span>
-            </div>
-          </div>
+          <SkillCard 
+            icon={<Database size={26} />}
+            title="ETL/ELT Data Engineering"
+            description="Designing and automating batch and streaming data pipelines using Python, PySpark, SQL, and Apache Airflow to ingest and transform multi-source datasets."
+            tags={["Python", "PySpark", "SQL / T-SQL", "Apache Airflow", "ETL/ELT"]}
+          />
+          <SkillCard 
+            icon={<Cloud size={26} />}
+            title="Cloud & Data Warehousing"
+            description="Architecting scalable cloud data lakes, warehouses, and storage tiers across Azure (Data Factory, Synapse) and AWS (S3, Redshift) with Terraform and CI/CD."
+            tags={["Azure Data Factory", "AWS S3 / Redshift", "CI/CD & DevOps", "Terraform / IaC"]}
+            isPurple={true}
+          />
+          <SkillCard 
+            icon={<TrendingUp size={26} />}
+            title="FinTech BI & Data Modeling"
+            description="Kimball dimensional modeling, high-performance transactional views, and executive business intelligence dashboards in Power BI, Tableau, and SSRS."
+            tags={["Power BI (DAX)", "Tableau", "Dimensional Modeling", "SSRS / SSIS"]}
+          />
+          <SkillCard 
+            icon={<ShieldCheck size={26} />}
+            title="Governance, Security & QA"
+            description="Implementing automated data validation frameworks, masking, and encryption protocols for strict POPIA, GDPR, and regulatory audit compliance."
+            tags={["POPIA Compliance", "Data Anonymization", "Audit Frameworks", "RBAC & IAM"]}
+            isPurple={true}
+          />
         </div>
 
         {/* Interactive Stack Explorer */}
@@ -229,6 +188,24 @@ const Home = () => {
               <div className="company-pill">
                 <strong>ExploreAI Academy</strong> <span className="role">• Data Engineer</span>
               </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Contact CTA */}
+        <div className="contact-cta-section" style={{ marginTop: '5rem', textAlign: 'center' }}>
+          <div className="card" style={{ padding: '3.5rem 2rem', background: 'var(--bg-glass)' }}>
+            <h2 className="page-title" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Ready to Scale Your <span className="glow-text">Data Architecture?</span></h2>
+            <p className="page-subtitle" style={{ margin: '0 auto 2.5rem', maxWidth: '600px' }}>
+              I'm currently open to Senior Cloud Data Engineering roles. Let's schedule a call to discuss how I can optimize your cloud infrastructure and BI workflows.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noreferrer" className="btn-primary">
+                Schedule a Call <ArrowRight size={18} />
+              </a>
+              <a href="mailto:fortunemogoeng@gmail.com" className="btn-secondary">
+                Email Me Directly
+              </a>
             </div>
           </div>
         </div>

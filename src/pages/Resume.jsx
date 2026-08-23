@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Briefcase, GraduationCap, Building2, Download, MapPin } from 'lucide-react';
+import { Calendar, Briefcase, GraduationCap, Building2, Download } from 'lucide-react';
 import './Resume.css';
 
 const Resume = () => {

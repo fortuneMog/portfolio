@@ -26,13 +26,13 @@ const Footer = () => {
             <h4>Fortune Mogoeng <span className="glow-red">.</span></h4>
             <p>Senior Cloud Data Engineer & FinTech Architecture Specialist</p>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <MapPin size={14} color="var(--accent-red)" /> Cape Town, Western Cape, South Africa
+              <MapPin size={14} color="var(--accent-cyan)" /> Cape Town, Western Cape, South Africa
             </p>
           </div>
 
           <div className="footer-links">
             <a href="mailto:fortunemogoeng@gmail.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Mail size={16} color="var(--accent-red)" /> fortunemogoeng@gmail.com
+              <Mail size={16} color="var(--accent-cyan)" /> fortunemogoeng@gmail.com
             </a>
             <a href="https://github.com/fortuneMog" target="_blank" rel="noreferrer" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <GithubIcon size={16} /> GitHub

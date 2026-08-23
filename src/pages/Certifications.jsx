@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, ExternalLink, ShieldCheck, Sparkles, CheckCircle2, Cpu, Database, TrendingUp, Terminal, FileSpreadsheet } from 'lucide-react';
+import { Award, ExternalLink } from 'lucide-react';
 
 const Certifications = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -287,19 +287,19 @@ const Certifications = () => {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                 <div style={{ 
-                  background: cert.badgeColor === 'red' ? 'rgba(255, 51, 102, 0.1)' : 'rgba(168, 85, 247, 0.1)', 
+                  background: cert.badgeColor === 'red' ? 'rgba(56, 189, 248, 0.1)' : 'rgba(99, 102, 241, 0.1)', 
                   padding: '0.85rem', 
                   borderRadius: '12px', 
-                  color: cert.badgeColor === 'red' ? 'var(--accent-red)' : 'var(--accent-purple)',
-                  border: `1px solid ${cert.badgeColor === 'red' ? 'rgba(255, 51, 102, 0.25)' : 'rgba(168, 85, 247, 0.25)'}`
+                  color: cert.badgeColor === 'red' ? 'var(--accent-cyan)' : 'var(--accent-secondary)',
+                  border: `1px solid ${cert.badgeColor === 'red' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(99, 102, 241, 0.25)'}`
                 }}>
                   <Award size={28} />
                 </div>
                 <span className="tag" style={{ fontSize: '0.75rem' }}>{cert.date}</span>
               </div>
 
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', color: '#FFFFFF', lineHeight: '1.35' }}>{cert.title}</h3>
-              <p style={{ color: 'var(--accent-red)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.35rem' }}>{cert.issuer}</p>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', color: 'var(--text-primary)', lineHeight: '1.35' }}>{cert.title}</h3>
+              <p style={{ color: 'var(--accent-cyan)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.35rem' }}>{cert.issuer}</p>
               
               {cert.credentialId && (
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
@@ -339,7 +339,7 @@ const Certifications = () => {
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.background = 'var(--accent-gradient)';
-                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.color = 'var(--text-primary)';
                     e.currentTarget.style.borderColor = 'transparent';
                   }}
                   onMouseOut={(e) => {
