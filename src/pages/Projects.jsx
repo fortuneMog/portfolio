@@ -53,6 +53,62 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 6,
+      title: "Automated Earthquake Data Engineering Pipeline (Databricks & Azure)",
+      category: "data-engineering",
+      badge: "Cloud Data Pipeline",
+      badgeType: "purple",
+      icon: <Database size={24} color="var(--accent-purple)" />,
+      description: "An end-to-end serverless data pipeline hosted on Azure, pulling live JSON data from the USGS API, transforming it via PySpark (Medallion Architecture), and orchestrating it via Databricks Workflows.",
+      highlights: [
+        "Implemented Medallion Architecture (Bronze, Silver, Gold layers) using PySpark",
+        "Used Azure Databricks Serverless Compute and Unity Catalog for secure data governance",
+        "Orchestrated complex data workflows with Databricks Jobs & reverse geocoding APIs"
+      ],
+      tags: ["Azure", "Databricks", "PySpark", "Medallion Architecture", "Data Engineering", "Python"],
+      github: "https://github.com/fortuneMog/Databricks_project",
+      architecture: {
+        problem: "Organizations need automated, scalable pipelines to turn raw, complex, and nested API data into clean, business-ready insights without managing manual cluster infrastructure.",
+        solution: "Built a fully automated Serverless Databricks pipeline leveraging Azure Data Lake Storage (ADLS Gen2) and Unity Catalog to incrementally refine raw earthquake data into analytical tables.",
+        flow: [
+          { stage: "Bronze Layer", desc: "Automated API extraction from USGS, storing raw and highly nested JSON data directly in ADLS Gen2." },
+          { stage: "Silver Layer", desc: "PySpark transformations flatten nested arrays, standardizes timestamps, and writes optimized Parquet files." },
+          { stage: "Gold Layer", desc: "Reverse geocoding User Defined Functions (UDFs) translate coordinates into Country Codes for business BI." },
+          { stage: "Orchestration", desc: "Databricks Jobs automate the sequential execution of notebooks with built-in retry and monitoring capabilities." }
+        ],
+        codeSnippet: `# 🥇 Gold Layer PySpark Transformation
+import reverse_geocoder as rg
+from pyspark.sql.functions import udf, col, when
+from pyspark.sql.types import StringType
+
+# Define UDF for Reverse Geocoding
+def get_country(lat, lon):
+    try:
+        if lat is None or lon is None:
+            return "Unknown"
+        result = rg.search((lat, lon))
+        return result[0]['cc']
+    except Exception:
+        return "Unknown"
+
+country_udf = udf(get_country, StringType())
+
+# Enrich Data with Country Code & Risk Classification
+gold_df = silver_df.withColumn(
+    "country_code", country_udf(col("latitude"), col("longitude"))
+).withColumn(
+    "risk_level",
+    when(col("mag") >= 6.0, "High Risk")
+    .when((col("mag") >= 4.0) < 6.0, "Moderate Risk")
+    .otherwise("Low Risk")
+)
+
+# Write to ADLS Gen2 Gold Container
+gold_df.write.format("delta").mode("overwrite").save(gold_path)`,
+        impact: "Eliminated manual API pulls and complex JSON parsing, providing analysts with ready-to-query Delta tables mapped directly to regional risk levels."
+      }
+    },
+    {
       id: 1,
       title: "SQL Data Engineering & Market Intelligence Pipeline",
       category: "data-engineering",
