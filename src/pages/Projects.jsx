@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Database, Layers, Car, Bot, Cloud, BarChart3, X, CheckCircle2, Terminal, Copy, Check } from 'lucide-react';
+import { Database, Layers, Car, Bot, Cloud, BarChart3, X, CheckCircle2, Terminal, Copy, Check, ShieldCheck } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import './Projects.css';
 
@@ -52,6 +52,59 @@ const Projects = () => {
   };
 
   const projects = [
+    {
+      id: 7,
+      title: "Enterprise Credit Card Fraud Detection Pipeline",
+      category: "fintech-cloud",
+      badge: "Snowflake & dbt",
+      badgeType: "purple",
+      icon: <ShieldCheck size={24} color="var(--accent-purple)" />,
+      description: "An end-to-end FinTech Data Engineering pipeline designed to ingest, process, and analyze credit card transactions to detect fraudulent behavior using Snowflake, Snowpipe, and dbt.",
+      highlights: [
+        "Built a custom Python generator simulating realistic transactions and 5 distinct fraud patterns",
+        "Implemented continuous data ingestion using Snowflake External Stages and Snowpipe",
+        "Orchestrated a strict Medallion Architecture (Bronze, Silver, Gold) in dbt with custom Jinja macros for PII masking"
+      ],
+      tags: ["Snowflake", "dbt", "Snowpipe", "Python", "Data Engineering", "FinTech"],
+      github: "https://github.com/fortuneMog/Snowflake_Fraud_Detection",
+      architecture: {
+        problem: "Financial institutions require real-time, scalable data pipelines to detect complex fraud patterns (like impossible travel and velocity spikes) while strictly governing access to PII.",
+        solution: "Engineered a modern data stack pipeline using Snowflake for robust RBAC infrastructure and dbt for modular, testable data transformations and risk scoring.",
+        flow: [
+          { stage: "Synthetic Generation", desc: "Python engine generates millions of transactions featuring diurnal cycles, Luhn-validated PANs, and specific fraud scenarios." },
+          { stage: "Continuous Ingestion", desc: "Snowpipe automatically loads raw JSON/CSV data from S3 external stages into Snowflake landing tables." },
+          { stage: "Cleansing (Silver)", desc: "dbt models flatten data, cast types, and apply custom Jinja macros to mask PANs (************1234) and calculate Haversine geographic distances." },
+          { stage: "Analytics (Gold)", desc: "Aggregated Data Marts assign a 0-100 composite fraud risk score to every cardholder based on velocity and geographic anomalies." }
+        ],
+        codeSnippet: `-- 🥈 Silver Layer dbt Transformation (Haversine Distance & PII Masking)
+WITH raw_txns AS (
+    SELECT * FROM {{ ref('stg_raw_transactions') }}
+),
+masked_txns AS (
+    SELECT 
+        transaction_id,
+        {{ mask_pii('credit_card_number') }} AS masked_pan,
+        merchant_id,
+        transaction_amount,
+        latitude,
+        longitude,
+        timestamp
+    FROM raw_txns
+)
+SELECT 
+    t1.transaction_id,
+    t1.masked_pan,
+    t1.transaction_amount,
+    {{ calculate_haversine('t1.latitude', 't1.longitude', 't2.latitude', 't2.longitude') }} AS distance_from_last_txn,
+    t1.timestamp
+FROM masked_txns t1
+LEFT JOIN masked_txns t2 
+    ON t1.masked_pan = t2.masked_pan 
+    AND t1.timestamp > t2.timestamp
+QUALIFY ROW_NUMBER() OVER (PARTITION BY t1.transaction_id ORDER BY t2.timestamp DESC) = 1;`,
+        impact: "Enabled real-time fraud hotspot detection and automated risk scoring while completely isolating raw PII from downstream business analysts via Snowflake RBAC."
+      }
+    },
     {
       id: 6,
       title: "Automated Earthquake Data Engineering Pipeline (Databricks & Azure)",
