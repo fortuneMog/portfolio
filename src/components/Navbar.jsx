@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Database, Menu, X } from 'lucide-react';
+import { Database, Menu, X, Sun, Moon } from 'lucide-react';
 import './Navbar.css';
 
 const GithubIcon = ({ size = 18 }) => (
@@ -20,6 +20,13 @@ const LinkedinIcon = ({ size = 18 }) => (
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'dark');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   return (
     <nav className="navbar">
@@ -38,6 +45,9 @@ const Navbar = () => {
           <NavLink to="/certifications" className={({isActive}) => isActive ? "nav-link active" : "nav-link"} onClick={() => setIsOpen(false)}>Certifications</NavLink>
           
           <div className="nav-socials">
+            <button onClick={toggleTheme} className="social-icon" style={{ border: 'none', background: 'none', cursor: 'pointer', padding: '0', display: 'flex', color: 'inherit' }} aria-label="Toggle theme">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
             <a href="https://github.com/fortuneMog" target="_blank" rel="noreferrer" className="social-icon" aria-label="GitHub">
               <GithubIcon size={18} />
             </a>
